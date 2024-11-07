@@ -5,6 +5,8 @@ import javax.swing.event.ChangeListener;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.temporal.ChronoUnit;
+import javax.swing.JOptionPane;
+
 
 public class PenghitungHariFrame extends javax.swing.JFrame {
 
@@ -12,14 +14,11 @@ public class PenghitungHariFrame extends javax.swing.JFrame {
         initComponents();
         addListeners();
 
-
     }
 
     private void addListeners() {
-        // Listener untuk mirroring perubahan bulan pada jComboBox1
+        // Listener untuk perubahan pada jComboBox1 dan jSpinner1
         jComboBox1.addActionListener(evt -> updateCalendar());
-
-        // Listener untuk mirroring perubahan tahun pada jSpinner1
         jSpinner1.addChangeListener(evt -> updateCalendar());
     }
 
@@ -32,6 +31,14 @@ public class PenghitungHariFrame extends javax.swing.JFrame {
             Month month = Month.of(monthIndex);
             LocalDate date = LocalDate.of(year, month, 1);
             jCalendar1.setDate(java.sql.Date.valueOf(date));
+
+            // Menghitung hari pertama dan hari terakhir dalam bulan
+            LocalDate firstDay = date;
+            LocalDate lastDay = date.withDayOfMonth(date.lengthOfMonth());
+
+            // Menampilkan informasi hari pertama dan terakhir di bulan
+            jLabel4.setText("Hari Pertama Dalam Bulan: " + firstDay.getDayOfWeek());
+            jLabel5.setText("Hari Terakhir Dalam Bulan: " + lastDay.getDayOfWeek());
         }
     }
 
@@ -225,7 +232,18 @@ public class PenghitungHariFrame extends javax.swing.JFrame {
 
             // Hitung selisih hari antara kedua tanggal
             long daysBetween = ChronoUnit.DAYS.between(date1, date2);
-            jLabel5.setText("Selisih Hari: " + Math.abs(daysBetween));
+
+            // Tampilkan hasil selisih hari menggunakan JOptionPane
+            JOptionPane.showMessageDialog(this,
+                    "Selisih Hari: " + Math.abs(daysBetween) + " hari",
+                    "Hasil Selisih Hari",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            // Jika salah satu tanggal tidak dipilih, tampilkan peringatan
+            JOptionPane.showMessageDialog(this,
+                    "Silakan pilih kedua tanggal terlebih dahulu.",
+                    "Peringatan",
+                    JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -235,7 +253,6 @@ public class PenghitungHariFrame extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
