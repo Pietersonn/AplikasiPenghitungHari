@@ -40,4 +40,4 @@
 - **Toedter Calendar**: Menggunakan komponen kalender pihak ketiga (`JCalendar` dan `JDateChooser`).
 
 ## DEMO
-
+![Demo Aplikasi](Demo.gif)
