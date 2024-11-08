@@ -19,7 +19,6 @@ public class PenghitungHariFrame extends javax.swing.JFrame {
 
     private void addListeners() {
         // Listener untuk perubahan pada jComboBox1 dan jSpinner1
-
         jSpinner1.addChangeListener(evt -> updateCalendar());
     }
 
